@@ -1,4 +1,4 @@
-const { Admin } = require("../db/index"); 
+const { Admin } = require("../db/index");
 
 function adminMiddleware(req, res, next) {
     const username = req.headers.username;
@@ -8,10 +8,13 @@ function adminMiddleware(req, res, next) {
         return res.status(401).json({ message: 'Authentication failed. Username and password are required in headers.' });
     }
     // Validate admin from the admin DB
-    Admin.findOne({ username, password })
+    Admin.findOne({
+        username: username,
+        password: password
+    })
         .then(admin => {
             if (!admin) {
-                return res.status(401).json({ message: 'Authentication failed. Invalid credentials.' });
+                return res.status(403).json({ message: 'Authentication failed. Invalid credentials.' });
             }
             // If authentication is successful, attach the admin object to the request for later use
             req.admin = admin;

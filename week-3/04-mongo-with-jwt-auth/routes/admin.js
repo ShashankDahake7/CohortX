@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const adminMiddleware = require("../middleware/admin");
 const { Admin, Course } = require("../db/index");
 const router = Router();
+const { JWT_SECRET } = require("../config");
 
 // Admin Routes
 router.post('/signup', async (req, res) => {
@@ -14,7 +15,7 @@ router.post('/signup', async (req, res) => {
             return res.status(400).json({ message: 'Username is already taken. Choose a different one.' });
         }
         // Create a new admin
-        const newAdmin = await Admin.create({ username, password });
+        await Admin.create({ username, password });
         res.json({ message: 'Admin created successfully' });
     } catch (error) {
         console.error(error);
@@ -31,7 +32,7 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         // Sign a JWT token with admin credentials
-        const token = jwt.sign({ username, password }, 'your-secret-key'); // Replace 'your-secret-key' with your actual secret key
+        const token = jwt.sign({ username, password }, JWT_SECRET); // Replace 'your-secret-key' with your actual secret key
         res.json({ token });
     } catch (error) {
         console.error(error);
@@ -55,7 +56,7 @@ router.get('/courses', adminMiddleware, async (req, res) => {
     try {
         // Fetch all courses
         const courses = await Course.find();
-        res.json({ courses });
+        res.json({ courses: courses });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });

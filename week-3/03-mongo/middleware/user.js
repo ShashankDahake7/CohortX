@@ -1,4 +1,4 @@
-const { User } = require("../db/index"); 
+const { User } = require("../db/index");
 
 function userMiddleware(req, res, next) {
     const username = req.headers.username;
@@ -8,7 +8,10 @@ function userMiddleware(req, res, next) {
         return res.status(401).json({ message: 'Authentication failed. Username and password are required in headers.' });
     }
     // Validate user from the user DB
-    User.findOne({ username, password })
+    User.findOne({
+        username: username,
+        password: password
+    })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ message: 'Authentication failed. Invalid credentials.' });

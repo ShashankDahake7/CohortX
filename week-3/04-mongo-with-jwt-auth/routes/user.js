@@ -2,6 +2,7 @@ const { Router } = require("express");
 const jwt = require('jsonwebtoken');
 const userMiddleware = require("../user");
 const { User, Course } = require("../db/index"); // Adjust the path based on your project structure
+const { JWT_SECRET } = require("../config");
 const router = Router();
 
 // User Routes
@@ -24,7 +25,6 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
     const { username, password } = req.body;
-
     try {
         // Check if the user exists and the password is correct
         const user = await User.findOne({ username, password });
@@ -32,7 +32,7 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         // Sign a JWT token with user credentials
-        const token = jwt.sign({ username, password }, 'your-secret-key'); // Replace 'your-secret-key' with your actual secret key
+        const token = jwt.sign({ username, password }, JWT_SECRET); // Replace 'your-secret-key' with your actual secret key
         res.json({ token });
     } catch (error) {
         console.error(error);
@@ -44,7 +44,7 @@ router.get('/courses', userMiddleware, async (req, res) => {
     try {
         // Fetch all courses
         const courses = await Course.find();
-        res.json({ courses });
+        res.json({ courses: courses });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });

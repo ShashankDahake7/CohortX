@@ -1,0 +1,1 @@
+module.exports = { JWT_SECRET: "shash_server" };

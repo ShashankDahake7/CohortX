@@ -1,0 +1,1 @@
+Hooks : Hooks allow function components to have access to state and other React features. Because of this, class components are generally no longer needed. ex. useEffect, useMemo, useCallback, useRef, useReducer, useContext, useLayoutEffect

@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Custom React</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        const reactElement = {
+            type: 'a',
+            props: {
+                href: 'https://google.com',
+                target: '_blank',
+                children: 'Visit Google'
+            }
+        };
+        function createElement(element) {
+            if (typeof element === 'string') {
+                return document.createTextNode(element);
+            }
+            const { type, props } = element;
+            const domElement = document.createElement(type);
+            for (const [prop, value] of Object.entries(props)) {
+                if (prop === 'children') {
+                    if (Array.isArray(value)) {
+                        value.forEach(child => {
+                            domElement.appendChild(createElement(child));
+                        });
+                    }
+                    else {
+                        domElement.appendChild(createElement(value));
+                    }
+                }
+                else {
+                    domElement[prop] = value;
+                }
+            }
+            return domElement;
+        }
+        function customRender(element, container) {
+            const domElement = createElement(element);
+            container.appendChild(domElement);
+        }
+        customRender(reactElement, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ const ALL_USERS = [
     {
         username: "shashank@gmail.com",
         password: "123",
-        name: "Shashank Dahake",
+        name: "Shashank",
     },
     {
         username: "raman@gmail.com",

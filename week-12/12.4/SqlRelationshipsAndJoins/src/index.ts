@@ -2,7 +2,7 @@
 
 // import { Client } from "pg";
 // const client = new Client({
-//     connectionString: "postgresql://postgres:<new_password>@localhost/postgres"
+//     connectionString: ""
 // });
 // async function createAddressesTable() {
 //     try {

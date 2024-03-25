@@ -1,0 +1,16 @@
+{
+  "name": "sqlrelationshipsandjoins",
+  "version": "1.0.0",
+  "description": "// docker run -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres\r // docker exec -it (containerID) /bin/bash\r // psql -h localhost -d postgres -U postgres",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/pg": "^8.11.4",
+    "pg": "^8.11.3"
+  }
+}

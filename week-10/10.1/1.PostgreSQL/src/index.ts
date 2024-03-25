@@ -207,4 +207,3 @@ import { Client } from "pg";
 //     }
 // }
 // getUserDetailsWithAddress("1");
-

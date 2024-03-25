@@ -1,1 +1,1 @@
-export const DB_URL = "postgres://avnadmin:AVNS_WPWBSO7Taiwa0iZV1fe@pg-1adbb77e-shashankdahake578-ffd8.a.aivencloud.com:20477/defaultdb?sslmode=require";
+export const DB_URL = "";

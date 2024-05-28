@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const Receiver = () => {
+    const videoRef = useRef<HTMLVideoElement>(null); // Ref for video element
+    const [playRequested, setPlayRequested] = useState(false); // State to track whether play has been requested
+
     useEffect(() => {
         const socket = new WebSocket('ws://localhost:8080');
         socket.onopen = () => {
@@ -12,17 +15,19 @@ export const Receiver = () => {
     }, []);
 
     function startReceiving(socket: WebSocket) {
-        const video = document.createElement('video');
-        document.body.appendChild(video);
-
         const pc = new RTCPeerConnection();
         pc.ontrack = (event) => {
             const stream = new MediaStream();
             event.streams[0].getTracks().forEach(track => {
                 stream.addTrack(track);
             });
-            video.srcObject = stream;
-            video.play();
+            if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+                // Check if play has been requested and if the video element is ready
+                if (playRequested && videoRef.current.readyState >= videoRef.current.HAVE_ENOUGH_DATA) {
+                    videoRef.current.play().catch(error => console.error('Error playing video:', error));
+                }
+            }
         };
 
         socket.onmessage = (event) => {
@@ -43,7 +48,15 @@ export const Receiver = () => {
         };
     }
 
-    return <div>
-        Receiver
-    </div>;
+    const requestPlay = () => {
+        setPlayRequested(true); // Set playRequested to true when play is requested
+    };
+
+    return (
+        <div>
+            <h2>Receiver</h2>
+            {/* Video element controlled by ref */}
+            <video ref={videoRef} autoPlay playsInline onClick={requestPlay} />
+        </div>
+    );
 };

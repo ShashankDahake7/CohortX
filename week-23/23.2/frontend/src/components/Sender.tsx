@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export const Sender = () => {
     const [socket, setSocket] = useState<WebSocket | null>(null);
     const [pc, setPC] = useState<RTCPeerConnection | null>(null);
+    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
 
     useEffect(() => {
         const socket = new WebSocket('ws://localhost:8080');
@@ -11,6 +12,23 @@ export const Sender = () => {
             socket.send(JSON.stringify({
                 type: 'sender'
             }));
+        };
+        const getCameraStream = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                setLocalStream(stream);
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        };
+        getCameraStream();
+        return () => {
+            if (socket) {
+                socket.close();
+            }
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
         };
     }, []);
 
@@ -49,19 +67,24 @@ export const Sender = () => {
             }));
         };
 
-        getCameraStreamAndSend(pc);
-    };
-
-    const getCameraStreamAndSend = (pc: RTCPeerConnection) => {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-            stream.getTracks().forEach((track) => {
-                pc.addTrack(track, stream);
+        if (localStream) {
+            localStream.getTracks().forEach((track) => {
+                pc.addTrack(track, localStream);
             });
-        });
+        }
     };
 
-    return <div>
-        Sender
-        <button onClick={initiateConn}>Send data</button>
-    </div>;
+    return (
+        <div>
+            <h2>Sender</h2>
+            {localStream && (<video autoPlay playsInline ref={(video) => {
+                if (video) {
+                    video.srcObject = localStream;
+                }
+            }}
+            />
+            )}
+            <button onClick={initiateConn}>Send data</button>
+        </div>
+    );
 };

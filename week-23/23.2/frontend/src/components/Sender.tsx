@@ -15,6 +15,8 @@ export const Sender = () => {
         };
         const getCameraStream = async () => {
             try {
+                // For Sharing Screen
+                // const screen = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
                 setLocalStream(stream);
             } catch (error) {
@@ -77,13 +79,16 @@ export const Sender = () => {
     return (
         <div>
             <h2>Sender</h2>
-            {localStream && (<video autoPlay playsInline ref={(video) => {
-                if (video) {
-                    video.srcObject = localStream;
-                }
-            }}
-            />
-            )}
+            {localStream &&
+                (
+                    <video autoPlay playsInline
+                        ref={(video) => {
+                            if (video) {
+                                video.srcObject = localStream;
+                            }
+                        }}
+                    />
+                )}
             <button onClick={initiateConn}>Send data</button>
         </div>
     );

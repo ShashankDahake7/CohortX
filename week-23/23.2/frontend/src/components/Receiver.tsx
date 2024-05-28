@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Receiver = () => {
-    const videoRef = useRef<HTMLVideoElement>(null); // Ref for video element
-    const [playRequested, setPlayRequested] = useState(false); // State to track whether play has been requested
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [playRequested, setPlayRequested] = useState(false);
 
     useEffect(() => {
         const socket = new WebSocket('ws://localhost:8080');
@@ -49,14 +49,17 @@ export const Receiver = () => {
     }
 
     const requestPlay = () => {
-        setPlayRequested(true); // Set playRequested to true when play is requested
+        setPlayRequested(true);
     };
 
     return (
         <div>
             <h2>Receiver</h2>
-            {/* Video element controlled by ref */}
             <video ref={videoRef} autoPlay playsInline onClick={requestPlay} />
         </div>
     );
 };
+
+// If video not played on receiver end
+// in console - 
+// document.querySelector('video').play();

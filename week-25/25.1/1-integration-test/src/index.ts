@@ -2,7 +2,6 @@ import express from "express";
 import { prismaClient } from "./db";
 
 export const app = express();
-
 app.use(express.json());
 
 app.post("/sum", async (req, res) => {

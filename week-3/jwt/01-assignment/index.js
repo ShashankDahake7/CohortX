@@ -50,13 +50,13 @@ app.post("/signin", function (req, res) {
             msg: "User doesn't exist in our in memory db",
         });
     }
-    var token = jwt.sign({ username: username }, "shhhhh");
+    var token = jwt.sign({ username: username }, jwtPassword);
     return res.json({
         token,
     });
 });
 
-// Returns an array of all users if user if user is signed in (token is correct) Return 403 status code if not
+// Returns an array of all users if user is signed in (token is correct) Return 403 status code if not
 app.get("/users", function (req, res) {
     const token = req.headers.authorization;
     try {

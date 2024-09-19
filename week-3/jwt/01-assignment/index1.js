@@ -7,6 +7,13 @@ mongoose.connect("your-mongodb-url");
 
 const User = mongoose.model("Users", { name: String, email: String, password: String });
 
+// const user = new User({
+//     name: "Shashank",
+//     email: "shashank@gmail.com",
+//     password: "123456"
+// })
+// user.save();
+
 app.post("/signup", async function (req, res) {
     const username = req.body.username;
     const password = req.body.password;

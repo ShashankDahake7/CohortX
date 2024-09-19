@@ -18,7 +18,7 @@ app.use((req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log(`Server is listening on port ${port}`);
+    console.log(`Server is listening on port 3000`);
 });
 
 function calculateAverageTime() {
@@ -26,6 +26,8 @@ function calculateAverageTime() {
     const totalTime = requestTimes.reduce((acc, time) => acc + time, 0);
     const averageTime = totalRequests > 0 ? (totalTime / totalRequests).toFixed(2) : 0;
     console.log(`Average request handling time: ${averageTime} ms`);
+    // Clear the array after calculation
+    requestTimes.length = 0;
 }
 
 setInterval(calculateAverageTime, 60000);

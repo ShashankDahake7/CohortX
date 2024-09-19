@@ -1,0 +1,1 @@
+// Just for removing tsconfig error

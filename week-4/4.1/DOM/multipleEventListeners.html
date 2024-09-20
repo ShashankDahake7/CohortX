@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Event Listeners Example</title>
+    <style>
+        #myButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="myButton">Click me</button>
+
+    <script>
+        // Get the button element
+        var button = document.getElementById("myButton");
+
+        // Event listener for the "click" event
+        button.addEventListener("click", function() {
+            // Change the button color
+            button.style.backgroundColor = "green";
+            // Display a message
+            alert("Button clicked!");
+        });
+
+        // Event listener for the "mouseenter" event
+        button.addEventListener("mouseenter", function() {
+            // Change the button color on mouse enter
+            button.style.backgroundColor = "yellow";
+        });
+
+        // Event listener for the "mouseleave" event
+        button.addEventListener("mouseleave", function() {
+            // Reset the button color on mouse leave
+            button.style.backgroundColor = "";
+        });
+    </script>
+
+</body>
+</html>

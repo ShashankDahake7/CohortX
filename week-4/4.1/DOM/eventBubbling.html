@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling Example</title>
+</head>
+
+<body>
+
+    <div id="outer" style="border: 1px solid red; padding: 10px;">
+        Outer
+        <div id="middle" style="border: 1px solid green; padding: 10px;">
+            Middle
+            <div id="inner" style="border: 1px solid blue; padding: 10px;">
+                Inner
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("outer").addEventListener("click", function () {
+            console.log("Outer Bubbling");
+        });
+
+        document.getElementById("middle").addEventListener("click", function () {
+            console.log("Middle Bubbling");
+        });
+
+        document.getElementById("inner").addEventListener("click", function () {
+            console.log("Inner Bubbling");
+        });
+    </script>
+
+</body>
+
+</html>

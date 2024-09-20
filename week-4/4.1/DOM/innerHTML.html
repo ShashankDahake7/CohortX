@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Name Greeting</title>
+</head>
+<body>
+
+    <label for="nameInput">Enter Your Name:</label>
+    <input type="text" id="nameInput">
+    <button onclick="displayGreeting()">Submit</button>
+
+    <p id="greetingMessage"></p>
+
+    <script>
+        function displayGreeting() {
+            // Get the entered name from the input field
+            var enteredName = document.getElementById("nameInput").value;
+
+            // Render the greeting message on the DOM using innerHTML
+            document.getElementById("greetingMessage").innerHTML = "Hello, " + enteredName + "!";
+        }
+    </script>
+
+</body>
+</html>

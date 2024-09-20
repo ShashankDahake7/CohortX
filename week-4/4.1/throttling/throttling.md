@@ -1,0 +1,2 @@
+**Throttling**
+is a technique that limits the number of times a function can be called within a certain period of time. This can be useful for preventing functions from being called too often, which can cause performance problems.

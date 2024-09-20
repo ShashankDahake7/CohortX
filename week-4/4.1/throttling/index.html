@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate</title>  
+    <script>
+        let timeout = null;
+        function throttlePopulateDiv() {
+            if (!timeout) {
+                populateDiv();
+                timeout = setTimeout(() => {
+                    timeout = null;
+                }, 100); // Adjust delay as needed
+            }
+        }
+        async function populateDiv() {
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            const response = await fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b);
+            const ans = await response.text();
+            document.getElementById("finalSum").innerHTML = ans;
+        }
+    </script>
+</head>
+
+<body>
+    <input onInput="throttlePopulateDiv()" id="firstNumber" type="text" placeholder="First Number" /> <br><br>
+    <input onInput="throttlePopulateDiv()" id="secondNumber" type="text" placeholder="Second Number" /> <br><br>
+    <div id="finalSum"></div>
+</body>
+
+</html>

@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
+// not watching
+// let state = {
+//   count: 0
+// }
+// function onClickHandler() {
+//   state.count = state.count + 1;
+// }
+{/* <button onClick={onClickHandler}>Counter {state.count}</button> */ }
+
 // State
 // function App() {
 //   const [count, setCount] = useState(0);
@@ -40,12 +49,3 @@ function CustomButton(props) {
 }
 
 export default App
-
-// not watching
-// let state = {
-//   count: 0
-// }
-// function onClickHandler() {
-//   state.count = state.count + 1;
-// }
-{/* <button onClick={onClickHandler}>Counter {state.count}</button> */ }

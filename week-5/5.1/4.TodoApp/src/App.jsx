@@ -16,7 +16,8 @@ function App() {
   }]);
 
   function addTodo() {
-    setTodos([...todos, { // ... -> spread operator
+    // ... -> spread operator
+    setTodos([...todos, {
       title: "new Todo",
       description: "new description"
     }])

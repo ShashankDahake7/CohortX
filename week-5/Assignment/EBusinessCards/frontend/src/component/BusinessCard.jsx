@@ -31,3 +31,5 @@ export function BusinessCard(props) {
         </div>
     );
 }
+
+export default BusinessCard;

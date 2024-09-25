@@ -43,3 +43,13 @@ function App() {
 }
 
 export default App;
+
+// You cannot directly use an async function as the first argument to useEffect. Here's why and how to work around it:
+// Why?
+// Return Value:
+// useEffect expects its callback function to return either nothing (undefined) or a cleanup function.
+// Async Functions:
+// async functions always return a Promise, which doesn't match what useEffect expects. 
+// How to Use Async/Await in useEffect
+// Define an Inner Function: Create a regular function inside your useEffect and make it async.
+// Call the Inner Function: Immediately call the inner function within the useEffect callback.

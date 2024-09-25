@@ -16,9 +16,9 @@ function App() {
     <div className="app-container">
       <div className="heading-section">
         <h1>Paragraph Generator:</h1>
+        <input type="text" className="word-input" placeholder="Enter Number of words" onChange={(e) => setInput(Number(e.target.value))} />
+        <button className="generate-button" onClick={generateParagraph}> Generate </button>
         <div className="input-section">
-          <input type="text" className="word-input" placeholder="Enter Number of words" onChange={(e) => setInput(Number(e.target.value))} />
-          <button className="generate-button" onClick={generateParagraph}> Generate </button>
           <div className="paragraph-section"> {paragraph && <Paragraph para={paragraph} />} </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 import axios from "axios";
 
-// Issue : Default value cannot be assynchronous
+// Issue : Default value cannot be asynchronous
 // export const notifications = atom({
 //     key: "networkAtom",
 //     default: async () => {

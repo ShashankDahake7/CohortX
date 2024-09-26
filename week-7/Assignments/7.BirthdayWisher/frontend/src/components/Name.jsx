@@ -6,10 +6,13 @@ function Name() {
     const input = useRef();
     const [value, setValue] = useState("");
     const [wish, setWish] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
-        input.current.focus();
-    }, []);
+        if (!isSubmitted) {
+            input.current.focus();
+        }
+    }, [isSubmitted]);
 
     async function action() {
         const response = await fetch("http://localhost:3000/wishes", {
@@ -23,24 +26,27 @@ function Name() {
         });
         const newWish = await response.json();
         setWish(newWish.wish);
+        setIsSubmitted(true);
     }
 
     return (
-        <div className="container" style={{backgroundImage: `url(${bg})`}}>
-            <div className="inputContainer">
-                <div className="title">Enter Name Here</div>
-                <input
-                    type="text"
-                    placeholder="Enter Name Here"
-                    className="inputField"
-                    ref={input}
-                    onChange={(e) => setValue(e.target.value)}
-                />
-                <button className="submitButton" onClick={action}>
-                    Done
-                </button>
-            </div>
-            <Wish value={wish} />
+        <div className="container" style={{ backgroundImage: `url(${bg})` }}>
+            {!isSubmitted && (
+                <div className="inputContainer">
+                    <div className="title">Enter Name Here</div>
+                    <input
+                        type="text"
+                        placeholder="Enter Name Here"
+                        className="inputField"
+                        ref={input}
+                        onChange={(e) => setValue(e.target.value)}
+                    />
+                    <button className="submitButton" onClick={action}>
+                        Done
+                    </button>
+                </div>
+            )}
+            {isSubmitted && <Wish value={wish} />}
         </div>
     );
 }

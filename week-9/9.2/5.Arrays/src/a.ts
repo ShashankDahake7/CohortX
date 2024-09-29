@@ -19,12 +19,6 @@ interface User {
 	age: number;
 }
 
-interface User {
-	firstName: string;
-	lastName: string;
-	age: number;
-}
-
 function filteredUsers(users: User[]) {
     return users.filter(x => x.age >= 18);
 }

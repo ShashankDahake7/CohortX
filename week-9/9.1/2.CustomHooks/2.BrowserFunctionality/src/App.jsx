@@ -54,8 +54,8 @@
 
 // export default App
 
-// 3. useMousePointer hook
-// Create a hook that returns you the current mouse pointer position.
+// 3. useDimensions hook
+// A custom react hook to fetch the height and width of element
 
 import { useEffect, useState } from 'react';
 

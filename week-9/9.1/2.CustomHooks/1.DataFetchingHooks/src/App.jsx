@@ -66,14 +66,14 @@
 
 // export default App
 
-// tep 2 - Cleaning the hook to include a loading parameter
+// Step 2 - Cleaning the hook to include a loading parameter
 // What if you want to show a loader when the data is not yet fetched from the backend?
 // import { useEffect, useState } from 'react'
 // import axios from 'axios'
 
 // function useTodos() {
-//   const [loading, setLoading] = useState(true);
 //   const [todos, setTodos] = useState([])
+//   const [loading, setLoading] = useState(true);
 
 //   useEffect(() => {
 //     axios.get("https://sum-server.100xdevs.com/todos")

@@ -33,27 +33,26 @@ router.get('/courses', async (req, res) => {
 });
 
 router.post('/courses/:courseId', userMiddleware, async (req, res) => {
+    const { courseId } = req.params;
     try {
-        const courseId = req.params.courseId;
-        const username = req.body.username;
-        // Check if the course exists
+        // Find the user and course
+        const user = req.user; // User object attached by userMiddleware
         const course = await Course.findById(courseId);
+        // Check if the course exists
         if (!course) {
             return res.status(404).json({ message: 'Course not found' });
         }
-        // Implement course purchase logic here
-        // You may want to update the user's purchasedCourses array or perform any other necessary actions
-        await User.updateOne({
-            username: username
-        }, {
-            "$push": {
-                purchasedCourses: courseId
-            }
-        })
-        return res.json({ message: 'Course purchased successfully' });
+        // Check if the user has already purchased the course
+        if (user.purchasedCourses.includes(courseId)) {
+            return res.status(400).json({ message: 'You have already purchased this course' });
+        }
+        // Update the User model to include the purchased course
+        user.purchasedCourses.push(courseId);
+        await user.save();
+        res.json({ message: 'Course purchased successfully' });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 

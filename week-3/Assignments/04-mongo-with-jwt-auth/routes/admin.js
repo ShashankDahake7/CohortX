@@ -32,7 +32,7 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         // Sign a JWT token with admin credentials
-        const token = jwt.sign({ username, password }, JWT_SECRET); // Replace 'your-secret-key' with your actual secret key
+        const token = jwt.sign({ username, password }, JWT_SECRET);
         res.json({ token });
     } catch (error) {
         console.error(error);

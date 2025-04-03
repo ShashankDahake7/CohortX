@@ -12,8 +12,6 @@ let errorCount = 0;
 
 app.get('/user', function (req, res) {
   throw new Error("some error");
-  // 500 
-  res.status(200).json({ name: 'john' });
 });
 
 app.post('/user', function (req, res) {

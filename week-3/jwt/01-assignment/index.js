@@ -30,7 +30,7 @@ function userExists(username, password) {
     // using find
     // ALL_USERS.find((user) => {
     //     if (user.username === username && user.password === password) {
-    //         userExist = true;
+    //         userExists = true;
     //     }
     // })
     for (let i = 0; i < ALL_USERS.length; i++) {
